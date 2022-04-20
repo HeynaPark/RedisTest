@@ -152,46 +152,12 @@ int main(int argc, char** argv) {
 
 	start = clock();
 
-	redisReply* reply=NULL;
+	redisReply* reply = NULL;
 	redisContext* c = redisConnect("127.0.0.1", 6379);
 	connectRedis(c);
 
 	setData(reply, c, buffer, length, jsonMsg);
-
 	getData(reply, c);
-
-	
-	//reply = (redisReply*)redisCommand(c, "HMSET %s %s %s %s %s %s %b", "cam1", "index", "123", "json", jsonMsg.c_str(), "image", buffer, (size_t)length);
-	////reply = (redisReply*)redisCommand(c, "HMSET %s %s %s %s %s %s %b", "cam2", "index", "456", "json", jsonMsg.c_str(), "image", buffer, (size_t)length);
-	//if (reply == NULL) {
-	//	printf("redisCommand reply is NULL\n");
-	//	return -1;
-	//}
-	//if (reply->type == REDIS_REPLY_ERROR) {
-	//	printf("Command Error: %s\n", reply->str);
-	//	freeReplyObject(reply);
-	//	return -1;
-	//}
-	//printf("Command reply: %s\n", reply->str);
-	//	
-
-	////reply = (redisReply*)redisCommand(c, "HMGET %s %s %s %s", "cam1", "index", "json", "image");
-	//reply = (redisReply*)redisCommand(c, "hvals cam1");
-	//if (reply == NULL) {
-	//	printf("[redis] redisCommand reply is NULL: %s", c->errstr);
-	//	return 0;
-	//}
-	//if (reply->type == REDIS_REPLY_ERROR) {
-	//	printf("[redis] command error : %s", reply->str);
-	//	freeReplyObject(reply);
-	//	return 0;
-	//}
-	//printf("[redis] HMSET result => %s", reply->str);
-
-
-	//for (int i = 0; i < reply->elements; i++) {
-	//	printf("[redis] %s", reply->element[i]->str);
-	//}
 
 
 	freeReplyObject(reply);
@@ -212,23 +178,6 @@ int main(int argc, char** argv) {
 	//out.open("grey_test.jpg", ofstream::binary);
 	//out.write(reply->str, reply->len);
 	//out.close();
-
-
-	//freeReplyObject(reply);
-
-	//// GET XXX
-	//reply = (redisReply*)redisCommand(c, "GET XXX");
-	//if (reply == NULL) {
-	//    printf("redisCommand reply is NULL\n");
-	//    return -1;
-	//}
-	//if (reply->type == REDIS_REPLY_ERROR) {
-	//    printf("Command Error: %s\n", reply->str);
-	//    freeReplyObject(reply);
-	//    return -1;
-	//}
-	//printf("Command reply: %s\n", reply->str);
-	//freeReplyObject(reply);
 
 	redisFree(c);
 
